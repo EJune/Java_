@@ -1,1 +1,120 @@
-xx
+package stack;
+import java.util.Stack;
+import java.util.*;
+
+public class Calc {
+		
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		Stack stack = new Stack();
+		String exp = sc.nextLine();
+		String result="";
+		System.out.println(exp+"=");
+		int prio=0;
+		for(int i=0;i<exp.length();i++){
+			char ch = exp.charAt(i);
+			if(ch <= '9' && ch >= '0'){
+				result+=ch;
+				System.out.println(result);}    //
+			else								//연산자가 올
+				result+=' ';					//붙이기 싫어
+								//여기까지 값을 받고 불러와서 char형으로 체크 후에 스택 넣을 준비.
+					if(ch=='(')					//괄호가 나오면...
+						stack.push(ch);			//스택에 넣는다.
+					else if(ch==')'){			
+						while(!stack.isEmpty()){
+							char t = (char) stack.pop();
+							if(t=='(')
+								break;
+							result+=t;
+												}
+									}
+					else
+						
+						switch(ch){
+						case '+':
+							prio =2;
+							break;
+						case '-':
+							prio =2;
+							break;
+						case '*':
+							prio =3;
+							break;
+						case '/':
+							prio =3;
+							break;
+						}
+						
+						
+				result += stack.pop();
+				}
+				stack.push(ch); // 자신이 들어가고
+				}
+		}
+		
+			while(!stack.isEmpty()) result += stack.pop();
+			System.out.println(exp + " : " + result);
+			
+			Stack stack2 = new Stack();
+
+			
+			// 연산하고 다시 넣는다.
+			for(int i=0;i<result.length();i++){
+			char t = result.charAt(i); // 한글자읽고
+			if(t>='0' && t<='9' || t=='.'){
+			String temp = t+"";
+			while(i<result.length()){
+			t = result.charAt(++i);
+			if(!(t>='0' && t<='9' || t=='.')){
+				--i; break;
+				}
+			temp += t;
+			}
+			stack2.push(Double.parseDouble(temp));
+			}
+			else if("+-*/".contains(t+"")){
+			if(!stack2.isEmpty()){
+			double n1 = (double) stack2.pop();
+			double n2 = (double) stack2.pop();
+			double r=0;
+			switch(t){
+			case '+':
+			r = n2 + n1;
+			break;
+			case '-':
+			r = (n2 - n1);
+			break;
+			case '*':
+			r = n2 * n1;
+			break;
+			case '/':
+			r = n2 / n1;
+			break;
+			}
+			stack2.push(r);
+			}
+			System.out.println("답 : " + stack2.pop());
+			}
+			
+			}
+		//System.out.println(st.empty());  // 공간이 비어있다면...
+		/*if((st.empty()) == false){
+			st.push(item);
+		}*/		
+	}
+			public static int getPriority(char op){
+			int result1=0;
+			switch(op){
+			case '+':
+			case '-':
+			result1 = 1;
+			break;
+			case '*':
+			case '/':
+			result1 = 2;
+			break;
+			}
+			return result1;
+			}
+	}
