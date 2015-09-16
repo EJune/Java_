@@ -45,6 +45,7 @@ public class Calc {
 							prio =3;
 							break;
 						}
+						// prio ..???
 						
 						
 				result += stack.pop();
@@ -103,7 +104,7 @@ public class Calc {
 			st.push(item);
 		}*/		
 	}
-			public static int getPriority(char op){
+			/*public static int getPriority(char op){
 			int result1=0;
 			switch(op){
 			case '+':
@@ -116,5 +117,5 @@ public class Calc {
 			break;
 			}
 			return result1;
-			}
+			}*/
 	}
